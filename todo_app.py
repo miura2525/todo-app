@@ -3,7 +3,7 @@ from tkinter import messagebox, ttk
 from datetime import datetime, date
 
 class Task:
-    """【Entity】課題オブジェクト"""
+    """課題オブジェクト"""
     def __init__(self, title: str, description: str, due_date: str):
         self.title = title
         self.description = description
@@ -11,7 +11,7 @@ class Task:
         self.completed = False
 
 class CreateTaskController:
-    """【Control】ビジネスロジック・検証コントローラー"""
+    """【Control】"""
     @staticmethod
     def validate_title(title: str) -> tuple[bool, str]:
         """課題名の文字数バリデーション（20文字以内）"""
@@ -123,7 +123,7 @@ class ToDoApp:
         delete_btn.pack(side="right", padx=5)
 
     def add_task(self):
-        """【ユースケース】課題内容を登録する"""
+        """課題内容を登録する"""
         title = self.title_entry.get()
         due_date = self.due_entry.get()
         description = self.desc_text.get("1.0", tk.END).strip()
@@ -174,7 +174,7 @@ class ToDoApp:
             self.tree.insert("", "end", iid=str(idx), values=(task.title, task.due_date, status_text), tags=tags)
 
     def view_detail(self):
-        """【ユースケース】課題内容を確認する"""
+        """課題内容を確認する"""
         selected = self.tree.selection()
         if not selected:
             messagebox.showwarning("選択エラー", "確認したい課題を選択してください。")
@@ -200,7 +200,7 @@ class ToDoApp:
         desc_box.config(state="disabled")
 
     def toggle_status(self):
-        """【ユースケース】完了/未完了状態に変更する"""
+        """完了/未完了状態に変更する"""
         selected = self.tree.selection()
         if not selected:
             messagebox.showwarning("選択エラー", "状態を変更する課題を選択してください。")
@@ -211,7 +211,7 @@ class ToDoApp:
         self.update_list()
 
     def delete_task(self):
-        """【ユースケース】課題を削除する"""
+        """課題を削除する"""
         selected = self.tree.selection()
         if not selected:
             messagebox.showwarning("選択エラー", "削除する課題を選択してください。")
@@ -225,7 +225,7 @@ class ToDoApp:
             self.update_list()
 
     def sort_tasks(self):
-        """【ユースケース】課題を並べ替える（締切日の昇順）"""
+        """課題を並べ替える（締切日の昇順）"""
         self.tasks.sort(key=lambda x: x.due_date)
         self.update_list()
 
